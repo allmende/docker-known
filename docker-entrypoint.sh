@@ -25,6 +25,12 @@ echo "dbname = '$MYSQL_DATABASE'" >> /var/www/known/config.ini
 echo "dbuser = '$MYSQL_USER'" >> /var/www/known/config.ini
 echo "dbpass = '$MYSQL_PASSWORD'" >> /var/www/known/config.ini
 
+# Fix changed folder paths within different versions of docker-known
+# for migration reasons.
+
+mkdir /known
+ln -s /var/www/known/uploads /known/uploads
+
 # Fix permissions for the uploads directory, since it was mounted by
 # --volumes-from when the container was run.
 chown -R root:www-data /known/uploads
